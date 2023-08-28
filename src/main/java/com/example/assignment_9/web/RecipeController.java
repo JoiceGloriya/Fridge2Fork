@@ -1,14 +1,14 @@
 package com.example.assignment_9.web;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.assignment_9.dto.Recipe;
 import com.example.assignment_9.services.FileService;
+import com.example.assignment_9.services.RecipeService;
 
 @RestController
 public class RecipeController {
@@ -16,6 +16,9 @@ public class RecipeController {
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private RecipeService recipeService;
 
 	@GetMapping("")
 	public String getTest() {
@@ -29,15 +32,10 @@ public class RecipeController {
 	}
 
 	@GetMapping("/vegan")
-	public String getVegan() {
-		try {
-			List<CSVRecord> fileContent = fileService.processFile();
+	public List<Recipe> getVegan() {
+		List<Recipe> veganRecipes = recipeService.getVegan(fileService.loadData());
 //			System.out.println(fileContent);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "This is vegan endpoint";
+		return veganRecipes;
 	}
 
 	@GetMapping("/vegan-and-gluten-free")
