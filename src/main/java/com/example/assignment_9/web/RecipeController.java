@@ -12,44 +12,45 @@ import com.example.assignment_9.services.RecipeService;
 
 @RestController
 public class RecipeController {
-	
-	
+
 	@Autowired
 	private FileService fileService;
-	
+
 	@Autowired
 	private RecipeService recipeService;
 
 	@GetMapping("")
 	public String getTest() {
-
 		return "This is test endpoint";
 	}
 
 	@GetMapping("/gluten-free")
-	public String getGlutenFree() {
-		return "This is gluten-free\" endpoint";
+	public List<Recipe> getGlutenFree() {
+		List<Recipe> recipes = recipeService.getGluten(fileService.loadData());
+		return recipes;
 	}
 
 	@GetMapping("/vegan")
 	public List<Recipe> getVegan() {
-		List<Recipe> veganRecipes = recipeService.getVegan(fileService.loadData());
-//			System.out.println(fileContent);
-		return veganRecipes;
+		List<Recipe> recipes = recipeService.getVegan(fileService.loadData());
+		return recipes;
 	}
 
 	@GetMapping("/vegan-and-gluten-free")
-	public String getVeganAndGluten() {
-		return "This is vegan-and-gluten-free endpoint";
+	public List<Recipe> getVeganAndGluten() {
+		List<Recipe> recipes = recipeService.getVeganGluten(fileService.loadData());
+		return recipes;
 	}
 
 	@GetMapping("/vegetarian")
-	public String getVege() {
-		return "This is vegetarian endpoint";
+	public List<Recipe> getVege() {
+		List<Recipe> recipes = recipeService.getVegan(fileService.loadData());
+		return recipes;
 	}
 
 	@GetMapping("/all-recipes")
-	public String allRecipes() {
-		return "This is all-recipes endpoint";
+	public List<Recipe> allRecipes() {
+		List<Recipe> recipes = recipeService.getAll(fileService.loadData());
+		return recipes;
 	}
 }
