@@ -24,6 +24,8 @@ public class Recipe {
     private Boolean vegan;
 
     private Boolean vegetarian;
+    
+    private Long id;
 
 	public Integer getCookingMinutes() {
 		return cookingMinutes;
@@ -121,13 +123,23 @@ public class Recipe {
 		this.vegetarian = vegetarian;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
 		return "Recipe [cookingMinutes=" + cookingMinutes + ", dairyFree=" + dairyFree + ", glutenFree=" + glutenFree
 				+ ", instructions=" + instructions + ", preparationMinutes=" + preparationMinutes + ", pricePerServing="
 				+ pricePerServing + ", readyInMinutes=" + readyInMinutes + ", servings=" + servings
 				+ ", spoonacularScore=" + spoonacularScore + ", title=" + title + ", vegan=" + vegan + ", vegetarian="
-				+ vegetarian + "]";
+				+ vegetarian + ", id=" + id + "]";
 	}
+
+
     
 }
