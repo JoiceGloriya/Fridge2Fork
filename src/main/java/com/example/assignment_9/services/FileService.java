@@ -1,6 +1,5 @@
 package com.example.assignment_9.services;
-
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.example.assignment_9.dto.Recipe;
@@ -16,22 +16,18 @@ import com.example.assignment_9.dto.Recipe;
 @Service
 public class FileService {
 
+	// Collect file name through application.properties:
 	@Value("${file.name}")
 	private String fileName;
 
-	public List<Recipe> loadData(){
-		List<CSVRecord> data = null;
-		try {
-			data = processFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	// Process file using CommonCSV Dependency, then use results to create Recipe POGOs:
+	public List<Recipe> loadData() {
+		List<CSVRecord> data = processFile();
 		return makeRecipeObjects(data);
 	}
 
 	private List<Recipe> makeRecipeObjects(List<CSVRecord> data) {
-		// TODO Auto-generated method stub
+		// Create and collect Recipe Objects:
 		List<Recipe> recipes = new ArrayList<>();
 		for (CSVRecord record : data) {
 			Recipe recipe = new Recipe();
@@ -51,32 +47,41 @@ public class FileService {
 			recipes.add(recipe);
 		}
 		return recipes;
-
 	}
 
-	public List<CSVRecord> processFile() throws IOException {
-		// TODO Auto-generated method stub
-
+	public List<CSVRecord> processFile() {
 		System.out.println("inside process file " + fileName);
 		List<CSVRecord> fileContent = new ArrayList<>();
-//		Reader in = new FileReader("recipes.txt");
-		Reader in = new FileReader(fileName);
-		Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader("Cooking Minutes", "Dairy Free", "Gluten Free",
-				"Instructions", "Preparation Minutes", "Price Per Serving", "Ready In Minutes", "Servings",
-				"Spoonacular Score", "Title", "Vegan", "Vegetarian").withIgnoreSurroundingSpaces().withEscape('\\')
-				.parse(in);
-		Boolean lineOne = true;
-//		Integer counter = 0;
-		for (CSVRecord record : records) {
-			if (lineOne) {
-				lineOne = false;
-				continue;
+		try {
+			// Using ClassPathResource to load the file from classpath
+			ClassPathResource resource = new ClassPathResource(fileName);
+			if (!resource.exists()) {
+				System.err.println("File not found in classpath: " + fileName);
+				return fileContent;  // Return empty list if file doesn't exist
 			}
-//			counter++;
-			fileContent.add(record);
-		}
 
+			Reader in = new InputStreamReader(resource.getInputStream());
+
+			Iterable<CSVRecord> records = CSVFormat.DEFAULT.withHeader("Cooking Minutes", "Dairy Free", "Gluten Free",
+							"Instructions", "Preparation Minutes", "Price Per Serving", "Ready In Minutes", "Servings",
+							"Spoonacular Score", "Title", "Vegan", "Vegetarian")
+					.withIgnoreSurroundingSpaces().withEscape('\\')
+					.parse(in);
+
+			Boolean lineOne = true;
+			for (CSVRecord record : records) {
+				if (lineOne) {
+					lineOne = false;  // Skip header line
+					continue;
+				}
+				fileContent.add(record);
+			}
+		} catch (IOException e) {
+			System.err.println("Error reading file: " + e.getMessage());
+			// Handle exception or return an empty list
+			return new ArrayList<>();
+		}
 		return fileContent;
 	}
-
 }
+
