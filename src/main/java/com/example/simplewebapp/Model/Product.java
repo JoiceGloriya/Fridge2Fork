@@ -19,7 +19,7 @@ public class Product {
     private int prdId;
     private String prdName;
     private int price;
-
+    
     public Product() {
 
     }
