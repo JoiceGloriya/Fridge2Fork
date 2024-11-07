@@ -19,7 +19,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{prdId}")
-    public Product getProductById(@PathVariable int prdId) {
+    public   Product getProductById(@PathVariable int prdId) {
         return service.getProductById(prdId);
     }
 
@@ -27,7 +27,6 @@ public class ProductController {
     public void addProduct(@RequestBody Product prd){
         service.addProduct(prd);
     }
-
     @PutMapping("/products")
     public void updateProduct(@RequestBody Product prd) {
         service.updateProduct(prd);
