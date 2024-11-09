@@ -15,7 +15,7 @@ public class Recipe {
 
     private Integer readyInMinutes;
 
-    private Integer servings;
+    private Integer      servings;
 
     private Double spoonacularScore;
 
