@@ -1,31 +1,33 @@
 package com.example.assignment_9.dto;
 
 public class Recipe {
-    private Integer cookingMinutes;
+	private Integer cookingMinutes;
 
-    private Boolean dairyFree;
+	private Boolean dairyFree;
 
-    private Boolean glutenFree;
+	private Boolean glutenFree;
 
-    private String instructions;
+	private String instructions;
 
-    private Double preparationMinutes;
+	private Double preparationMinutes;
 
-    private Double pricePerServing;
+	private Double pricePerServing;
 
-    private Integer readyInMinutes;
+	private Integer readyInMinutes;
 
-    private Integer      servings;
+	private Integer servings;
 
-    private Double spoonacularScore;
+	private Double spoonacularScore;
 
-    private String title;
+	private String title;
 
-    private Boolean vegan;
+	private Boolean vegan;
 
-    private Boolean vegetarian;
-    
-    private Long id;
+	private Boolean vegetarian;
+
+	private Long id;
+
+	private String imageUrl;
 
 	public Integer getCookingMinutes() {
 		return cookingMinutes;
@@ -131,6 +133,15 @@ public class Recipe {
 		this.id = id;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Recipe [cookingMinutes=" + cookingMinutes + ", dairyFree=" + dairyFree + ", glutenFree=" + glutenFree
@@ -138,8 +149,6 @@ public class Recipe {
 				+ pricePerServing + ", readyInMinutes=" + readyInMinutes + ", servings=" + servings
 				+ ", spoonacularScore=" + spoonacularScore + ", title=" + title + ", vegan=" + vegan + ", vegetarian="
 				+ vegetarian + ", id=" + id + "]";
+
 	}
-
-
-    
 }
