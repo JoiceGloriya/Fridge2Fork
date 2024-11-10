@@ -5,9 +5,9 @@ import java.io.IOException;
 
 public class RecipeDatabasePopulator {
     public static void main(String[] args) {
-        String dbUrl = "jdbc:mysql://localhost:3306/recipe_db";
-        String user = "your_username";
-        String password = "your_password";
+        String dbUrl = "jdbc:mysql://localhost:3306/database-tables.sql";
+        String user = "root";
+        String password = "Joice@123456";
 
         try (Connection conn = DriverManager.getConnection(dbUrl, user, password);
              Statement stmt = conn.createStatement()) {
