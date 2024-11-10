@@ -88,7 +88,7 @@ public class RecipeController {
 
 		try {
 			JsonNode rootNode = objectMapper.readTree(jsonResponse);
-			JsonNode hitsNode = rootNode.path("hits");  // "hits" is the array of recipe results in the API response
+			JsonNode hitsNode = rootNode.path("hits");  // Access the array of recipe results
 
 			// Iterate through each hit and map it to a Recipe object
 			for (JsonNode hit : hitsNode) {
@@ -99,16 +99,19 @@ public class RecipeController {
 				recipe.setVegan(recipeNode.path("vegan").asBoolean());
 				recipe.setGlutenFree(recipeNode.path("glutenFree").asBoolean());
 				recipe.setVegetarian(recipeNode.path("vegetarian").asBoolean());
-				recipe.setImageUrl(recipeNode.path("image").asText());
-				// Add other properties as needed based on the API response
+
+				// Check if image URL is present, otherwise set a default
+				String imageUrl = recipeNode.has("image") && !recipeNode.path("image").asText().isEmpty()
+						? recipeNode.path("image").asText()
+						: "404.jpg"; // Replace with a real fallback image URL
+				recipe.setImageUrl(imageUrl);
 
 				recipes.add(recipe);
 			}
 		} catch (Exception e) {
-			e.printStackTrace(); // You can handle this more gracefully based on your needs
+			e.printStackTrace(); // Handle this based on your error-handling strategy
 		}
 
 		return recipes;
 	}
-
 }

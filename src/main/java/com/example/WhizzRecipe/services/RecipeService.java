@@ -37,7 +37,7 @@ public class RecipeService {
         return veganRecipes;
     }
 
-    // Filter to collect gluten free recipes:
+    // Filter to collect gluten-free recipes:
     public List<Recipe> getGluten(List<Recipe> allRecipes) {
         List<Recipe> getGlutenFree = new ArrayList<>();
         getGlutenFree = allRecipes.stream().filter(item -> item.getGlutenFree()).toList();
