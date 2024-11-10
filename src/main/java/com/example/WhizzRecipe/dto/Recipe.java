@@ -36,6 +36,7 @@ public class Recipe {
 
 	}
 
+
 	public Integer getCookingMinutes() {
 		return cookingMinutes;
 	}
