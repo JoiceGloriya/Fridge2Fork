@@ -1,4 +1,4 @@
-package com.example.assignment_9.configuration;
+package com.example.WhizzRecipe.configuration;
 
 import javax.sql.DataSource;
 import   org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
-public class DatabaseConfig {
+public class DatabaseConfiguration {
 
     @Bean(name = "mySQL")
     @ConfigurationProperties(prefix = "spring.datasource")

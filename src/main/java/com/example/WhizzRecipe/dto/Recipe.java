@@ -1,4 +1,4 @@
-package com.example.assignment_9.dto;
+package com.example.WhizzRecipe.dto;
 
 public class Recipe {
 	private Integer cookingMinutes;
@@ -28,6 +28,13 @@ public class Recipe {
 	private Long id;
 
 	private String imageUrl;
+
+	public Recipe(String label, String image, String url) {
+	}
+
+	public Recipe() {
+
+	}
 
 	public Integer getCookingMinutes() {
 		return cookingMinutes;

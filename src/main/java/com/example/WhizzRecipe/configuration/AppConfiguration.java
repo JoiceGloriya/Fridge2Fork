@@ -1,5 +1,4 @@
-package com.example.assignment_9.configuration;
-
+package com.example.WhizzRecipe.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-public class AppConfig {
+public class AppConfiguration {
 
 
     @Bean

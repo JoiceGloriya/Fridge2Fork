@@ -1,10 +1,10 @@
-package com.example.assignment_9;
+package com.example.WhizzRecipe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Assignment9ApplicationTests {
+class WhizzRecipeTests {
 
 	@Test
 	void contextLoads() {

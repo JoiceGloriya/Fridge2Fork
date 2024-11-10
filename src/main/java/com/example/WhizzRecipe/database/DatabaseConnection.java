@@ -1,4 +1,4 @@
-package com.example.assignment_9.database;
+package com.example.WhizzRecipe.database;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
