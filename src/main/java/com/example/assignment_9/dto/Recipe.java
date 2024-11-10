@@ -29,6 +29,14 @@ public class Recipe {
 
 	private String imageUrl;
 
+	public Recipe(String label, String image, String url) {
+	}
+
+	public Recipe() {
+
+	}
+
+
 	public Integer getCookingMinutes() {
 		return cookingMinutes;
 	}
