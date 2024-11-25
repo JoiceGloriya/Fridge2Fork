@@ -33,14 +33,14 @@ public class UnsplashService {
                 return response.getResults().get(0).getUrls().getRegular(); // Return the first image URL
             }
         } catch (HttpClientErrorException e) {
-            // Log the error in case of HTTP issues
+            // Log the error in case of some HTTP issues
             System.out.println("Error occurred while fetching data from Unsplash: " + e.getMessage());
         } catch (Exception e) {
-            // Catch other exceptions like network issues
+            // Catch other exceptions like network issues...
             System.out.println("Unexpected error: " + e.getMessage());
         }
 
-        return ""; // Return an empty string if no image is found or an error occurred
+        return ""; // Return an empty string if no image is found.
     }
 }
 

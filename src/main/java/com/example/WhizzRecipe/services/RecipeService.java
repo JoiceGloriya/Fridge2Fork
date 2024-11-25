@@ -29,7 +29,7 @@ public class RecipeService {
         return allRecipes;
     }
 
-    // Filter to collect vegan recipes:
+    // Filtering for vegan recipes:
     public List<Recipe> getVegan(List<Recipe> allRecipes) {
         List<Recipe> veganRecipes = new ArrayList<>();
         veganRecipes = allRecipes.stream().filter(item -> item.getVegan()).toList();
@@ -62,11 +62,11 @@ public class RecipeService {
     }
 
     public String getRecipes(String query) {
-        // Edamam API URL for recipe search
+        // Edamam API URL to search..
         String url = String.format("https://api.edamam.com/api/recipes/v2?type=public&q=%s&app_id=%s&app_key=%s",
                 query, apiId, apiKey);
 
-        // Make the HTTP request to the API
+        // Make the HTTP request to the API.
         return restTemplate.getForObject(url, String.class);
     }
 }

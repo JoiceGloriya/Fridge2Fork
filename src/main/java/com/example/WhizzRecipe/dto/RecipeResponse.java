@@ -5,7 +5,6 @@ public class RecipeResponse {
 
     private Hits[] hits;  // Array of hits containing recipes
 
-    // Getter and Setter for hits
     public Hits[] getHits() {
         return hits;
     }
@@ -14,7 +13,6 @@ public class RecipeResponse {
         this.hits = hits;
     }
 
-    // Inner static class for Hit object
     public static class Hits {
         private Recipe recipe;  // Recipe object inside each hit
 
@@ -28,13 +26,11 @@ public class RecipeResponse {
         }
     }
 
-    // Inner static class for Recipe object
     public static class Recipe {
         private String label;  // Recipe name
         private String image;  // Image URL of the recipe
         private String url;    // URL for the recipe (optional)
 
-        // Getters and Setters for label, image, and url
         public String getLabel() {
             return label;
         }

@@ -25,7 +25,6 @@ import com.example.WhizzRecipe.dto.Recipe;
 @Service
 public class FileService {
 
-	// Collect file name through application.properties:
 	@Value("${file.name}")
 	private String fileName;
 
@@ -87,7 +86,7 @@ public class FileService {
 			}
 		} catch (IOException e) {
 			System.err.println("Error reading file: " + e.getMessage());
-			// Handle exception or return an empty list
+			// for handling exceptions, return an empty list
 			return new ArrayList<>();
 		}
 		return fileContent;
