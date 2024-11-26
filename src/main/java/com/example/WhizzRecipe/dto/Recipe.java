@@ -25,9 +25,9 @@ public class Recipe {
 
 	private Boolean vegetarian;
 
-	private Long id;
+//	private Long id;
 
-	private String imageUrl;
+//	private String imageUrl;
 
 	public Recipe(String label, String image, String url) {
 	}
@@ -133,21 +133,21 @@ public class Recipe {
 		this.vegetarian = vegetarian;
 	}
 
-	public Long getId() {
-		return id;
-	}
+//	public Long getId() {
+//		return id;
+//	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
+//	public String getImageUrl() {
+//		return imageUrl;
+//	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
+//	public void setImageUrl(String imageUrl) {
+//		this.imageUrl = imageUrl;
+//	}
 
 
 	@Override
@@ -156,7 +156,7 @@ public class Recipe {
 				+ ", instructions=" + instructions + ", preparationMinutes=" + preparationMinutes + ", pricePerServing="
 				+ pricePerServing + ", readyInMinutes=" + readyInMinutes + ", servings=" + servings
 				+ ", spoonacularScore=" + spoonacularScore + ", title=" + title + ", vegan=" + vegan + ", vegetarian="
-				+ vegetarian + ", id=" + id + "]";
+				+ vegetarian + "]";
 
 	}
 }

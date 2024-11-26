@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.WhizzRecipe.dto.Recipe;
 import com.example.WhizzRecipe.services.FileService;
-import com.example.WhizzRecipe.services.RecipeService;
+import com.example.WhizzRecipe.services.EdamamService;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class RecipeController {
 
 	private final FileService fileService;
-	private final RecipeService recipeService;
+	private final EdamamService edamamService;
 
 	@Autowired
-	public RecipeController(RecipeService recipeService, FileService fileService) {
-		this.recipeService = recipeService;
+	public RecipeController(EdamamService edamamService, FileService fileService) {
+		this.edamamService = edamamService;
 		this.fileService = fileService;
 	}
 
 	@GetMapping("/search")
 	public List<Recipe> searchRecipes(@RequestParam String query) {
-		String jsonResponse = recipeService.getRecipes(query);
+		String jsonResponse = edamamService.getRecipes(query);
 		// Parse JSON response into a list of Recipe objects
 		return parseRecipes(jsonResponse);  // Implement this method to map JSON to Recipe objects
 	}
@@ -42,7 +42,7 @@ public class RecipeController {
 		if (recipes == null || recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No gluten-free recipes found.");
 		}
-		return recipeService.getGluten(recipes);
+		return edamamService.getGluten(recipes);
 	}
 
 	@GetMapping("/vegan")
@@ -51,7 +51,7 @@ public class RecipeController {
 		if (recipes == null || recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No vegan recipes found.");
 		}
-		return recipeService.getVegan(recipes);
+		return edamamService.getVegan(recipes);
 	}
 
 	@GetMapping("/vegan-and-gluten-free")
@@ -60,7 +60,7 @@ public class RecipeController {
 		if (recipes == null || recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No vegan and gluten-free recipes found.");
 		}
-		return recipeService.getVeganGluten(recipes);
+		return edamamService.getVeganGluten(recipes);
 	}
 
 	@GetMapping("/vegetarian")
@@ -69,7 +69,7 @@ public class RecipeController {
 		if (recipes == null || recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No vegetarian recipes found.");
 		}
-		return recipeService.getVegetarian(recipes);
+		return edamamService.getVegetarian(recipes);
 	}
 
 	@GetMapping("/all-recipes")
@@ -78,7 +78,7 @@ public class RecipeController {
 		if (recipes == null || recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No recipes found.");
 		}
-		return recipeService.getAll(recipes);
+		return edamamService.getAll(recipes);
 	}
 
 
@@ -100,11 +100,11 @@ public class RecipeController {
 				recipe.setGlutenFree(recipeNode.path("glutenFree").asBoolean());
 				recipe.setVegetarian(recipeNode.path("vegetarian").asBoolean());
 
-				// Check if image URL is present, otherwise set a default
-				String imageUrl = recipeNode.has("image") && !recipeNode.path("image").asText().isEmpty()
-						? recipeNode.path("image").asText()
-						: "404.jpg"; // Replace with a real fallback image URL
-				recipe.setImageUrl(imageUrl);
+//				// Check if image URL is present, otherwise set a default
+//				String imageUrl = recipeNode.has("image") && !recipeNode.path("image").asText().isEmpty()
+//						? recipeNode.path("image").asText()
+//						: "404.jpg"; // Replace with a real fallback image URL
+//				recipe.setImageUrl(imageUrl);
 
 				recipes.add(recipe);
 			}
