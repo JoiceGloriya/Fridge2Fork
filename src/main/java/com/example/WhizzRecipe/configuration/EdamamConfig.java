@@ -6,14 +6,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class EdamamConfig {
 
-    // Properties read from application.properties or environment variables
-    @Value("${edamam.api.url:#{null}}") // Default to null if not provided
+    @Value("${edamam.api.url:#{null}}")
     private String baseUrl;
 
-    @Value("${edamam.api.id:#{null}}") // Default to null if not provided
+    @Value("${edamam.api.id:#{null}}")
     private String appId;
 
-    @Value("${edamam.api.key:#{null}}") // Default to null if not provided
+    @Value("${edamam.api.key:#{null}}") 
     private String appKey;
 
     // Getter methods
