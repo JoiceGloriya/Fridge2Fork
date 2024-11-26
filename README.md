@@ -110,7 +110,7 @@ A JSON response containing recipe info such as ingredients, nutritional values, 
 
 Enter:
 ```bash
-http://localhost:8080/vegan-and-gluten-free
+https://localhost:8080/vegan-and-gluten-free
 ```
 Sample Output:
 Recipe specifics for vegan and gluten-free meals, including instructions, portion sizes, and nutritional information.
@@ -128,10 +128,14 @@ ingredients, and recipe descriptions.
 
 Enter: 
 ```bash
-http://localhost:8080/getRecipeImages?query=pizza
+https://localhost:8080/getRecipeImages?query=pizza
 ```
 Sample Output:
-An image URL for the recipe based on the query. Contributing If you\'d like to contribute to the development of WhizzRecipe, feel free to fork the repository and submit a pull request with your improvements or fixes.
+An image URL for the recipe based on the query.
+
+## Contribution:
+
+If you\'d like to contribute to the development of WhizzRecipe, feel free to fork the repository and submit a pull request with your improvements or fixes.
 
 ### Steps for Contribution:
 - Fork the repo.
