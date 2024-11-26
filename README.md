@@ -83,7 +83,7 @@ spoonacular.api.key=yourApiKey
 
 Copy the code below:
 ```bash
-unsplash.api.url = https://api.unsplash.com/photos unsplash.api.key=yourApiKey
+unsplash.api.url=https://api.unsplash.com/photos unsplash.api.key=yourApiKey
 ```
 
 Run the Spring Boot application with the following:
