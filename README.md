@@ -38,7 +38,7 @@ well as Spoonacular) were generated based on a keyword query.
 
 Example Request:
 ```bash
-http://localhost:8080/getRecipeImages?query=pizza
+https://localhost:8080/getRecipeImages?query=pizza
 ```
 Returns an URL of a picture for a recipe based on the search query.
 
@@ -56,63 +56,80 @@ Copy code:
 ```bash
  git clone
 https://github.com/JoiceGloriya/WhizzRecipe.git
-```
 cd WhizzRecipe
+```
 
 ## Environmental Variables:
 
-Set up the following environment variables in
-your application.properties or application.yml:
+Set up the following environment variables in your application.properties or application.yml:
 
 ### Edamam\'s API:
 
-Copy code: 
-- edamam.api.url=https://api.edamam.com
-- edamam.api.id=yourAppId edamam.api.key=yourAppKey
+Copy code
+```bash
+edamam.api.url=https://api.edamam.com
+edamam.api.id=yourAppId edamam.api.key=yourAppKey
+```
 
 ### Spoonacular API:
 
-Copy code:
-- spoonacular.api.url=https://api.spoonacular.com/recipes
-- spoonacular.api.key=yourApiKey
+Copy code
+```bash
+spoonacular.api.url=https://api.spoonacular.com/recipes
+spoonacular.api.key=yourApiKey
+```
 
 ### Unsplash API:
 
 Copy the code below:
-- unsplash.api.url = https://api.unsplash.com/photos unsplash.api.key=yourApiKey
+```bash
+unsplash.api.url = https://api.unsplash.com/photos unsplash.api.key=yourApiKey
+```
 
 Run the Spring Boot application with the following:
 
 Maven command: 
-bash
-mvn spring-boot:run.
+```bash
+mvn spring-boot:run
+```
 
-Alternatively, use your IDE\'s run configuration.
+Alternatively, use can your IDE\'s run configuration.
 
 ## Accessing Endpoints: 
 
 ### Edamam API for Recipe Search:
 
-Enter: `https://api.edamam.com/search?q=chicken,tomato&app_id=yourAppId&app_key=yourAppKey`
-Sample Output: A JSON response containing recipe info such as
-ingredients, nutritional values, recipe photos, and more.
+Enter:
+```bash
+https://api.edamam.com/search?q=chicken,tomato&app_id=yourAppId&app_key=yourAppKey
+```
+Sample Output:
+A JSON response containing recipe info such as ingredients, nutritional values, recipe photos, and more.
 
 ### Recipes searching (using recipe.txt):
 
-Enter: `http://localhost:8080/vegan-and-gluten-free`
+Enter:
+```bash
+http://localhost:8080/vegan-and-gluten-free
+```
 Sample Output:
-Recipe specifics for vegan and gluten-free meals, including
-instructions, portion sizes, and nutritional information.
+Recipe specifics for vegan and gluten-free meals, including instructions, portion sizes, and nutritional information.
 
 ### Spoonacular API (Recipes by Ingredient):
 
-Enter: `https://api.spoonacular.com/recipes/findByIngredients?ingredients=tomato,cheese&apiKey=yourApiKey`
+Enter: 
+```bash
+https://api.spoonacular.com/recipes/findByIngredients?ingredients=tomato,cheese&apiKey=yourApiKey
+```
 Sample Output: A list of recipes, including used ingredients, missing
 ingredients, and recipe descriptions.
 
 ### Unsplash\'s API (Get Recipe Image):
 
-Enter: `http://localhost:8080/getRecipeImages?query=pizza`
+Enter: 
+```bash
+http://localhost:8080/getRecipeImages?query=pizza
+```
 Sample Output:
 An image URL for the recipe based on the query. Contributing If you\'d like to contribute to the development of WhizzRecipe, feel free to fork the repository and submit a pull request with your improvements or fixes.
 
