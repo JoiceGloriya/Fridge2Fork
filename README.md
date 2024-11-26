@@ -16,7 +16,9 @@ Provides extensive recipe information based on the ingredients.
 ### Edamam's API:
 
 Example request:
-```https://api.edamam.com/search?q=chicken,tomato&app_id=yourAppId&app_key=yourAppKey```
+```bash
+https://api.edamam.com/search?q=chicken,tomato&app_id=yourAppId&app_key=yourAppKey
+```
 Returns a collection of recipes featuring ingredients, instructions,
 nutritional info, and more.
 
