@@ -6,7 +6,7 @@ WhizzRecipe is a web application that allows users to find recipes based on avai
 - Recipe Search by ingredients: Users can search for recipes depending on the ingredients they have.
 - Dietary Preference Filters: Supports dietary choices such as vegan, gluten-free, vegetarian, and more.
 - Nutritional Information: Provides detailed nutritional information on dishes, such as calories, fat, protein, and carbs.
-- Recipe photographs: Retrieve recipe photographs via the Unsplash API for a visual preview.
+- Recipe photographs: Retrieves recipe images from both Edamam and Spoonacular APIs, but for higher-quality and more visually appealing images, the Unsplash API is used to provide images for a visual preview.
 - Multiple Recipe APIs: Combines Edamam, Spoonacular, and Unsplash APIs to improve search results.
 
 ## APIs used:
