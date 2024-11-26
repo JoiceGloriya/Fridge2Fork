@@ -52,9 +52,9 @@ Returns an URL of a picture for a recipe based on the search query.
 ## Cloning:
 
 Clone the repo with bash.
-Copy code: 
+Copy the code below:
 ```bash
- git clone
+git clone
 https://github.com/JoiceGloriya/WhizzRecipe.git
 cd WhizzRecipe
 ```
@@ -65,7 +65,7 @@ Set up the following environment variables in your application.properties or app
 
 ### Edamam\'s API:
 
-Copy code
+Copy the code below:
 ```bash
 edamam.api.url=https://api.edamam.com
 edamam.api.id=yourAppId edamam.api.key=yourAppKey
@@ -73,7 +73,7 @@ edamam.api.id=yourAppId edamam.api.key=yourAppKey
 
 ### Spoonacular API:
 
-Copy code
+Copy the code below:
 ```bash
 spoonacular.api.url=https://api.spoonacular.com/recipes
 spoonacular.api.key=yourApiKey
