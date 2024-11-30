@@ -1,6 +1,7 @@
 package com.example.WhizzRecipe.dto;
 
 import jakarta.persistence.*;
+import java.util.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,27 +12,39 @@ public class Recipe implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+    @Column(name = "CookingMinutes")
 	private Integer cookingMinutes;
+	@Column(name = "DairyFree")
 	private Boolean dairyFree;
+	@Column(name = "GlutenFree")
 	private Boolean glutenFree;
-
-	@Column(columnDefinition = "TEXT") // Marks this as a large object (for longer text fields)
+	@Column(name = "instructions", columnDefinition = "TEXT")
 	private String instructions;
-
+	@Column(name = "PreparationMinutes")
 	private Double preparationMinutes;
+	@Column(name = "PricePerServing")
 	private Double pricePerServing;
+	@Column(name = "ReadyInMinutes")
 	private Integer readyInMinutes;
+	@Column(name = "Servings")
 	private Integer servings;
+	@Column(name = "SpoonacularScore")
 	private Double spoonacularScore;
+	@Column(name = "Title")
 	private String title;
+	@Column(name = "Vegan")
 	private Boolean vegan;
+	@Column(name = "Vegetarian")
 	private Boolean vegetarian;
-
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"))
+	@Column(name = "ingredient")
+	private List<String> ingredients;
 
 
 	// Constructors
-	public Recipe() {}
+	public Recipe() {
+	}
 
 	public Recipe(String label, String url) {
 		this.title = label;
