@@ -1,41 +1,51 @@
 package com.example.WhizzRecipe.dto;
 
-public class Recipe {
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "recipes")
+public class Recipe implements Serializable {
+
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	private Integer cookingMinutes;
-
 	private Boolean dairyFree;
-
 	private Boolean glutenFree;
 
+	@Column(columnDefinition = "TEXT") // Marks this as a large object (for longer text fields)
 	private String instructions;
 
 	private Double preparationMinutes;
-
 	private Double pricePerServing;
-
 	private Integer readyInMinutes;
-
 	private Integer servings;
-
 	private Double spoonacularScore;
-
 	private String title;
-
 	private Boolean vegan;
-
 	private Boolean vegetarian;
 
-//	private Long id;
 
-//	private String imageUrl;
 
-	public Recipe(String label, String image, String url) {
+	// Constructors
+	public Recipe() {}
+
+	public Recipe(String label, String url) {
+		this.title = label;
+		this.instructions = url;
 	}
 
-	public Recipe() {
-
+	// Getters and Setters
+	public Long getId() {
+		return id;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public Integer getCookingMinutes() {
 		return cookingMinutes;
@@ -133,30 +143,14 @@ public class Recipe {
 		this.vegetarian = vegetarian;
 	}
 
-//	public Long getId() {
-//		return id;
-//	}
-
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-
-//	public String getImageUrl() {
-//		return imageUrl;
-//	}
-
-//	public void setImageUrl(String imageUrl) {
-//		this.imageUrl = imageUrl;
-//	}
-
 
 	@Override
 	public String toString() {
-		return "Recipe [cookingMinutes=" + cookingMinutes + ", dairyFree=" + dairyFree + ", glutenFree=" + glutenFree
-				+ ", instructions=" + instructions + ", preparationMinutes=" + preparationMinutes + ", pricePerServing="
-				+ pricePerServing + ", readyInMinutes=" + readyInMinutes + ", servings=" + servings
-				+ ", spoonacularScore=" + spoonacularScore + ", title=" + title + ", vegan=" + vegan + ", vegetarian="
-				+ vegetarian + "]";
-
+		return "Recipe [id=" + id + ", cookingMinutes=" + cookingMinutes + ", dairyFree=" + dairyFree +
+				", glutenFree=" + glutenFree + ", instructions=" + instructions +
+				", preparationMinutes=" + preparationMinutes + ", pricePerServing=" + pricePerServing +
+				", readyInMinutes=" + readyInMinutes + ", servings=" + servings +
+				", spoonacularScore=" + spoonacularScore + ", title=" + title +
+				", vegan=" + vegan + ", vegetarian=" + vegetarian + "]";
 	}
 }

@@ -1,6 +1,8 @@
 package com.example.WhizzRecipe.controller;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.WhizzRecipe.repository.RecipeRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.example.assignment_9.dto.RecipeResponse;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +21,20 @@ import com.example.WhizzRecipe.services.EdamamService;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
 	private final FileService fileService;
 	private final EdamamService edamamService;
+
+	@Autowired
+	private RecipeRepository recipeRepository;
+
+	// GET all recipes
+	@GetMapping
+	public List<Recipe> getAllRecipes() {
+		return recipeRepository.findAll();
+	}
 
 	@Autowired
 	public RecipeController(EdamamService edamamService, FileService fileService) {
