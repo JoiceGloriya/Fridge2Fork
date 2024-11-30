@@ -106,14 +106,7 @@ https://api.edamam.com/search?q=chicken,tomato&app_id=yourAppId&app_key=yourAppK
 Sample Output:
 A JSON response containing recipe info such as ingredients, nutritional values, recipe photos, and more.
 
-### Recipes searching (using recipe.txt):
 
-Enter:
-```bash
-https://localhost:8080/vegan-and-gluten-free
-```
-Sample Output:
-Recipe specifics for vegan and gluten-free meals, including instructions, portion sizes, and nutritional information.
 
 ### Spoonacular API (Recipes by Ingredient):
 
