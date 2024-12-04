@@ -55,16 +55,24 @@ public class EdamamService {
 
     // Fetch recipes from Edamam API:
     public String getRecipes(String query) {
-        String url = String.format("%s/v2?type=public&q=%s&app_id=%s&app_key=%s",
+        // Ensure configuration is valid
+        edamamConfig.validateConfig();
+
+        // Build the URL using the query and parameters (App ID and API Key)
+        String url = String.format("%s?q=%s&app_id=%s&app_key=%s",
                 edamamConfig.getBaseUrl(), query, edamamConfig.getAppId(), edamamConfig.getAppKey());
 
+        // Log the request URL for debugging
         logger.info("Requesting recipes from Edamam with URL: {}", url);
 
         try {
+            // Make the API request using RestTemplate and return the response body
             return restTemplate.getForObject(url, String.class);
         } catch (Exception e) {
+            // Log the error message if the request fails
             logger.error("Error fetching recipes from Edamam: {}", e.getMessage());
-            throw new RuntimeException("Error fetching recipes: " + e.getMessage(), e);
+            // Throw a runtime exception to signal an error occurred
+            throw new RuntimeException("Error fetching recipes from Edamam: " + e.getMessage(), e);
         }
     }
 }

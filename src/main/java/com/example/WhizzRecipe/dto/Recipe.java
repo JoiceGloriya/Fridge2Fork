@@ -1,12 +1,27 @@
 package com.example.WhizzRecipe.dto;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.*;
 import java.io.Serializable;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "recipes")
 public class Recipe implements Serializable {
+
+	public double getCalories() {
+		return calories;
+	}
+
+	public void setCalories(double calories) {
+		this.calories = calories;
+	}
 
 	@Id
 	@Column(name = "id")
@@ -40,122 +55,32 @@ public class Recipe implements Serializable {
 	@CollectionTable(name = "recipe_ingredients", joinColumns = @JoinColumn(name = "recipe_id"))
 	@Column(name = "ingredient")
 	private List<String> ingredients;
+	private String imageUrl;
 
 
-	// Constructors
-	public Recipe() {
+
+	private List<String> dietLabels;
+	private List<String> healthLabels;
+	private List<String> cautions;
+	private double calories;
+	private double totalWeight;
+	private int totalTime;
+	private List<String> cuisineType;
+	private List<String> mealType;
+	private List<String> dishType;
+
+	public List<String> getDishType() {
+		return dishType;
+	}
+
+	public void setDishType(List<String> dishType) {
+		this.dishType = dishType;
 	}
 
 	public Recipe(String label, String url) {
 		this.title = label;
 		this.instructions = url;
 	}
-
-	// Getters and Setters
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getCookingMinutes() {
-		return cookingMinutes;
-	}
-
-	public void setCookingMinutes(Integer cookingMinutes) {
-		this.cookingMinutes = cookingMinutes;
-	}
-
-	public Boolean getDairyFree() {
-		return dairyFree;
-	}
-
-	public void setDairyFree(Boolean dairyFree) {
-		this.dairyFree = dairyFree;
-	}
-
-	public Boolean getGlutenFree() {
-		return glutenFree;
-	}
-
-	public void setGlutenFree(Boolean glutenFree) {
-		this.glutenFree = glutenFree;
-	}
-
-	public String getInstructions() {
-		return instructions;
-	}
-
-	public void setInstructions(String instructions) {
-		this.instructions = instructions;
-	}
-
-	public Double getPreparationMinutes() {
-		return preparationMinutes;
-	}
-
-	public void setPreparationMinutes(Double preparationMinutes) {
-		this.preparationMinutes = preparationMinutes;
-	}
-
-	public Double getPricePerServing() {
-		return pricePerServing;
-	}
-
-	public void setPricePerServing(Double pricePerServing) {
-		this.pricePerServing = pricePerServing;
-	}
-
-	public Integer getReadyInMinutes() {
-		return readyInMinutes;
-	}
-
-	public void setReadyInMinutes(Integer readyInMinutes) {
-		this.readyInMinutes = readyInMinutes;
-	}
-
-	public Integer getServings() {
-		return servings;
-	}
-
-	public void setServings(Integer servings) {
-		this.servings = servings;
-	}
-
-	public Double getSpoonacularScore() {
-		return spoonacularScore;
-	}
-
-	public void setSpoonacularScore(Double spoonacularScore) {
-		this.spoonacularScore = spoonacularScore;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public Boolean getVegan() {
-		return vegan;
-	}
-
-	public void setVegan(Boolean vegan) {
-		this.vegan = vegan;
-	}
-
-	public Boolean getVegetarian() {
-		return vegetarian;
-	}
-
-	public void setVegetarian(Boolean vegetarian) {
-		this.vegetarian = vegetarian;
-	}
-
 
 	@Override
 	public String toString() {
@@ -165,5 +90,73 @@ public class Recipe implements Serializable {
 				", readyInMinutes=" + readyInMinutes + ", servings=" + servings +
 				", spoonacularScore=" + spoonacularScore + ", title=" + title +
 				", vegan=" + vegan + ", vegetarian=" + vegetarian + "]";
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(int totalTime) {
+		this.totalTime = totalTime;
+	}
+
+	public double getTotalWeight() {
+		return totalWeight;
+	}
+
+	public void setTotalWeight(double totalWeight) {
+		this.totalWeight = totalWeight;
+	}
+
+	public List<String> getCautions() {
+		return cautions;
+	}
+
+	public void setCautions(List<String> cautions) {
+		this.cautions = cautions;
+	}
+
+	public List<String> getDietLabels() {
+		return dietLabels;
+	}
+
+	public void setDietLabels(List<String> dietLabels) {
+		this.dietLabels = dietLabels;
+	}
+
+	public List<String> getMealType() {
+		return mealType;
+	}
+
+	public void setMealType(List<String> mealType) {
+		this.mealType = mealType;
+	}
+
+	public List<String> getHealthLabels() {
+		return healthLabels;
+	}
+
+	public void setHealthLabels(List<String> healthLabels) {
+		this.healthLabels = healthLabels;
+	}
+
+	public List<String> getCuisineType() {
+		return cuisineType;
+	}
+
+	public void setCuisineType(List<String> cuisineType) {
+		this.cuisineType = cuisineType;
 	}
 }

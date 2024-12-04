@@ -4,6 +4,7 @@ import com.example.WhizzRecipe.dto.Recipe;
 import com.example.WhizzRecipe.repository.RecipeRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,7 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public Optional<Recipe> getRecipeById(Long id) {
+    public Optional<Recipe> getRecipeById(BigInteger id) {
         return recipeRepository.findById(id);
     }
 
@@ -28,7 +29,7 @@ public class RecipeService {
         return recipeRepository.save(recipe);
     }
 
-    public void deleteRecipe(Long id) {
+    public void deleteRecipe(BigInteger id) {
         recipeRepository.deleteById(id);
     }
 }

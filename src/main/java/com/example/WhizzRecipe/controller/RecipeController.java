@@ -7,6 +7,7 @@ import com.example.WhizzRecipe.repository.RecipeRepository;
 import com.example.WhizzRecipe.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import com.example.WhizzRecipe.dto.Recipe;
@@ -36,10 +37,9 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET recipes by search query (e.g., title)
 	@GetMapping("/search")
 	public List<Recipe> searchRecipes(@RequestParam String query) {
-		List<Recipe> recipes = recipeRepository.findByTitleContainingIgnoreCase(query); // Assuming this method is in the repository
+		List<Recipe> recipes = recipeRepository.findByTitleContainingIgnoreCase(query);
 		if (recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No recipes found for the given query.");
 		}
@@ -88,12 +88,12 @@ public class RecipeController {
 
 	// GET all recipes that match a given criterion
 	@GetMapping("/all-recipes")
-	public List<Recipe> allRecipes() {
+	public ResponseEntity<List<Recipe>> allRecipes() {
 		List<Recipe> recipes = recipeRepository.findAll();
 		if (recipes.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No recipes found.");
 		}
-		return recipes;
+		return new ResponseEntity<>(recipes, HttpStatus.OK);
 	}
 
 	@PostMapping

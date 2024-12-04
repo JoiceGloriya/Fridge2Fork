@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Results</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header>
+    <div class="logo">WhizzRecipe</div>
+</header>
+
+<main>
+    <h1>Recipe Results</h1>
+
+    <div>
+        <h2>Spoonacular Recipes</h2>
+        <div th:if="${spoonacularRecipes}">
+            <div th:each="recipe : ${spoonacularRecipes}">
+                <h3 th:text="${recipe.title}">Recipe Title</h3>
+                <p th:text="${recipe.instructions}">Instructions</p>
+                <img th:src="${recipe.image}" alt="Recipe Image">
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2>Edamam Recipes</h2>
+        <div th:if="${edamamRecipes}">
+            <div th:each="recipe : ${edamamRecipes}">
+                <h3 th:text="${recipe.title}">Recipe Title</h3>
+                <p th:text="${recipe.instructions}">Instructions</p>
+                <img th:src="${recipe.image}" alt="Recipe Image">
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
