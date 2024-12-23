@@ -27,7 +27,6 @@ public class RecipeController {
 		this.recipeRepository = recipeRepository;
 	}
 
-	// GET all recipes from the database
 	@GetMapping
 	public List<Recipe> getAllRecipes() {
 		List<Recipe> recipes = recipeRepository.findAll();
@@ -46,7 +45,6 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET gluten-free recipes
 	@GetMapping("/gluten-free")
 	public List<Recipe> getGlutenFree() {
 		List<Recipe> recipes = recipeRepository.findByGlutenFreeTrue();
@@ -56,7 +54,6 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET vegan recipes
 	@GetMapping("/vegan")
 	public List<Recipe> getVegan() {
 		List<Recipe> recipes = recipeRepository.findByVeganTrue();
@@ -66,7 +63,6 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET vegetarian recipes
 	@GetMapping("/vegetarian")
 	public List<Recipe> getVegetarian() {
 		List<Recipe> recipes = recipeRepository.findByVegetarianTrue();
@@ -76,7 +72,6 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET recipes that are both vegan and gluten-free
 	@GetMapping("/vegan-and-gluten-free")
 	public List<Recipe> getVeganAndGlutenFree() {
 		List<Recipe> recipes = recipeRepository.findByVeganTrueAndGlutenFreeTrue();
@@ -86,7 +81,6 @@ public class RecipeController {
 		return recipes;
 	}
 
-	// GET all recipes that match a given criterion
 	@GetMapping("/all-recipes")
 	public ResponseEntity<List<Recipe>> allRecipes() {
 		List<Recipe> recipes = recipeRepository.findAll();
@@ -97,9 +91,9 @@ public class RecipeController {
 	}
 
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)  // This indicates that the resource was created successfully
+	@ResponseStatus(HttpStatus.CREATED)
 	public Recipe createRecipe(@RequestBody Recipe recipe) {
-		return recipeRepository.save(recipe);  // Saves the recipe to the database
+		return recipeRepository.save(recipe);
 	}
 
 }
