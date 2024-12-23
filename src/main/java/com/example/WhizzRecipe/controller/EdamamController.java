@@ -83,10 +83,8 @@ public class EdamamController {
                 recipe.setDietLabels(extractLabels(recipeNode.path("dietLabels")));
                 recipe.setHealthLabels(extractLabels(recipeNode.path("healthLabels")));
                 recipe.setCautions(extractLabels(recipeNode.path("cautions")));
-
-                // Extract and set the new properties
-                recipe.setCalories(recipeNode.path("calories").asDouble());
-                recipe.setTotalWeight(recipeNode.path("totalWeight").asDouble());
+                recipe.setCalories(Math.round(recipeNode.path("calories").asDouble()));
+                recipe.setTotalWeight(Math.round(recipeNode.path("totalWeight").asDouble()));
                 recipe.setTotalTime(recipeNode.path("totalTime").asInt());
                 recipe.setCuisineType(extractLabels(recipeNode.path("cuisineType")));
                 recipe.setMealType(extractLabels(recipeNode.path("mealType")));
@@ -101,8 +99,7 @@ public class EdamamController {
                 }
                 recipe.setIngredients(ingredients);
                 recipe.setImageUrl(recipeNode.path("image").asText());
-                // Add the recipe to the list
-                recipes.add(recipe);
+
             }
         } catch (Exception e) {
             logger.error("Error parsing Edamam response: {}", e.getMessage());
