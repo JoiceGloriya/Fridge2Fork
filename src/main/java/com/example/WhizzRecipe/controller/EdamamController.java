@@ -92,14 +92,14 @@ public class EdamamController {
                 recipe.setMealType(extractLabels(recipeNode.path("mealType")));
                 recipe.setDishType(extractLabels(recipeNode.path("dishType")));
                 recipes.add(recipe);
+                recipe.setImageUrl(recipeNode.path("image").asText());
 
-                // Extract ingredients
                 List<String> ingredients = new ArrayList<>();
                 JsonNode ingredientLines = recipeNode.path("ingredientLines");
                 for (JsonNode ingredient : ingredientLines) {
                     ingredients.add(ingredient.asText());
                 }
-                recipe.setIngredients(ingredients);  // Set the ingredients list
+                recipe.setIngredients(ingredients);
                 recipe.setImageUrl(recipeNode.path("image").asText());
                 // Add the recipe to the list
                 recipes.add(recipe);

@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhizzRecipe - Find Recipes</title>
+    <title>Whizz Recipe Finder</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
     <style>
+        .hero {
+            background-color: #804b59 !important;
+            color: white !important;
+            padding: 20px !important;
+            border-radius: 10px !important;
+        }
+
+        body .hero {
+            background-color: #804b59 !important;
+            color: white !important;
+        }
+
+        .hero * {
+            background-color: transparent !important;
+        }
 
         body {
-            background-color: #804b59;
+            background-color: #5b2937;
         }
 
         #recipeCarousel {
@@ -21,7 +35,7 @@
 
         .carousel-item img {
             object-fit: cover;
-            height: 100%;
+            height: 500px;
             width: 100%;
         }
 
@@ -31,25 +45,21 @@
             }
 
             .carousel-item img {
-                max-width: 100%;
-                height: auto;
+                object-fit: cover;
+                height: 80vh;
+                width: 100%;
             }
         }
 
         header nav {
-            background-color: #804b59;
+            background-color: #87bd97;
             padding: 10px;
         }
 
         header nav .logo {
             font-size: 24px;
-            color: white;
+            color: #5b2937;
             font-weight: bold;
-        }
-
-        .hero {
-            text-align: center;
-            margin: 50px 0;
         }
 
         .hero h1 {
@@ -77,6 +87,41 @@
             background-color: #804b59;
             border-radius: 5px;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            overflow: auto;
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+        }
+
     </style>
 </head>
 <body>
@@ -99,29 +144,30 @@
             <div class="carousel-item active">
                 <img src="images/pizza.jpg" class="d-block w-100" alt="image of pizza">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Delicious Chicken Recipe</h5>
+                    <h5>Delicious Chicken Pizza</h5>
                     <p>Quick and easy to make</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="images/chicken.jpg" class="d-block w-100" alt="image of chicken pieces">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Vegan Salad</h5>
-                    <p>Healthy and refreshing</p>
+                    <h5>Spicy Chicken Wings</h5>
+                    <p>Tangy and spicy</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img src="images/naan.jpg" class="d-block w-100" alt="image of naan">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Chocolate Cake</h5>
-                    <p>Perfect for dessert lovers</p>
+                    <h5>Butter Naan</h5>
+                    <p>Authentic Indian dish</p>
                 </div>
             </div>
+            <div id="loading" style="display: none;">Loading...</div>
             <div class="carousel-item">
                 <img src="images/noodles.jpg" class="d-block w-100" alt="image of noodles">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Spaghetti Bolognese</h5>
-                    <p>A classic Italian dish</p>
+                    <h5>Noodles</h5>
+                    <p>A classic Japanese dish</p>
                 </div>
             </div>
         </div>
@@ -136,18 +182,23 @@
     </div>
 
     <section class="hero">
-        <h1>Find Recipes with Ingredients You Have</h1>
-        <p>Enter the ingredients you have, and we'll find recipes for you!</p>
+        <h1>Find Recipes with What You've Got</h1>
+        <p>Enter the ingredients you have, and we' ll find recipes for you!</p>
         <form id="recipeForm" th:action="@{/api/edamam/searchByIngredients}" method="GET" onsubmit="fetchRecipes(); return false;">
             <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients..." required>
             <button type="submit">Find Recipes</button>
         </form>
         <section id="recipeResults">
-<!--            <h2>Recipes:</h2>-->
             <ul id="recipeList"></ul>
         </section>
     </section>
 </main>
+
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
 <script>
     function fetchRecipes() {
         const ingredients = document.getElementById('ingredients').value;
@@ -161,27 +212,38 @@
                 const recipeList = document.getElementById('recipeList');
                 recipeList.innerHTML = ''; // Clear previous results
 
+                const seenRecipes = new Set();
+
                 if (data.length === 0) {
                     recipeList.innerHTML = '<li>No recipes found.</li>';
                 } else {
                     data.forEach(recipe => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `
-                            <strong>${recipe.title}</strong><br>
-                            Vegan: ${recipe.vegan ? "Yes" : "No"},<br>
-                            Gluten-Free: ${recipe.glutenFree ? "Yes" : "No"},<br>
-                            Vegetarian: ${recipe.vegetarian ? "Yes" : "No"}<br>
-                            <strong>Diet Labels:</strong> ${recipe.dietLabels.join(', ')}<br>
-                            <strong>Health Labels:</strong> ${recipe.healthLabels.join(', ')}<br>
-                            <strong>Cautions:</strong> ${recipe.cautions.join(', ')}<br>
-                            <strong>Calories:</strong> ${recipe.calories}<br>
-                            <strong>Total Weight:</strong> ${recipe.totalWeight} grams<br>
-                            <strong>Total Time:</strong> ${recipe.totalTime} minutes<br>
-                            <strong>Cuisine Type:</strong> ${recipe.cuisineType.join(', ')}<br>
-                            <strong>Meal Type:</strong> ${recipe.mealType.join(', ')}<br>
-                            <strong>Dish Type:</strong> ${recipe.dishType.join(', ')}
+                        if (!seenRecipes.has(recipe.title)) {
+                            seenRecipes.add(recipe.title);
+
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                            <div style="display: flex; align-items: center;">
+                                <img src="${recipe.imageUrl}" alt="Recipe Image" style="width: 100px; height: 100px; object-fit: cover; margin-right: 15px;" onclick="openModal(this)">
+                                <div>
+                                    <strong>${recipe.title}</strong><br>
+                                    Vegan: ${recipe.vegan ? "Yes" : "No"},<br>
+                                    Gluten-Free: ${recipe.glutenFree ? "Yes" : "No"},<br>
+                                    Vegetarian: ${recipe.vegetarian ? "Yes" : "No"}<br>
+                                    <strong>Diet Labels:</strong> ${recipe.dietLabels.join(', ')}<br>
+                                    <strong>Health Labels:</strong> ${recipe.healthLabels.join(', ')}<br>
+                                    <strong>Cautions:</strong> ${recipe.cautions.join(', ')}<br>
+                                    <strong>Calories:</strong> ${recipe.calories}<br>
+                                    <strong>Total Weight:</strong> ${recipe.totalWeight} grams<br>
+                                    <strong>Total Time:</strong> ${recipe.totalTime} minutes<br>
+                                    <strong>Cuisine Type:</strong> ${recipe.cuisineType.join(', ')}<br>
+                                    <strong>Meal Type:</strong> ${recipe.mealType.join(', ')}<br>
+                                    <strong>Dish Type:</strong> ${recipe.dishType.join(', ')}
+                                </div>
+                            </div>
                         `;
-                        recipeList.appendChild(li);
+                            recipeList.appendChild(li);
+                        }
                     });
                 }
             })
@@ -190,11 +252,20 @@
                 alert("Failed to fetch recipes. Please try again later.");
             });
     }
+
+    function openModal(img) {
+        const modal = document.getElementById("myModal");
+        const modalImg = document.getElementById("img01");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
