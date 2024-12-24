@@ -19,7 +19,7 @@ header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 1rem 2rem;
     display: flex;
-    justify-content: center; /* Center logo and nav links */
+    justify-content: center;
     align-items: center;
 }
 
@@ -28,7 +28,7 @@ header {
     font-weight: bold;
     color: #ae8be0;
     text-align: center;
-    margin-right: auto; /* Move logo to the left */
+    margin-right: auto;
 }
 
 .nav-links {
@@ -57,7 +57,7 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 60vh; /* Adjust the height for better center alignment */
+    min-height: 60vh;
 }
 
 .hero h1 {
