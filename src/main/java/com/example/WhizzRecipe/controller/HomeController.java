@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-
 @Controller
 public class HomeController {
 
@@ -26,13 +24,12 @@ public class HomeController {
 
     @GetMapping("/searchByIngredients")
     public String searchRecipesByIngredients(@RequestParam String ingredients, Model model) {
-        // Call both APIs with the provided ingredients
+
         String edamamRecipes = edamamService.getRecipes(ingredients);
 
-        // Add the results to the model
         model.addAttribute("edamamRecipes", edamamRecipes);
 
-        return "searchResults";  // Show the results on a new page
+        return "searchResults";
     }
 }
 

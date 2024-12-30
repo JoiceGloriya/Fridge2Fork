@@ -3,7 +3,7 @@ package com.example.WhizzRecipe.dto;
 
 public class RecipeResponse {
 
-    private Hits[] hits;  // Array of hits containing recipes
+    private Hits[] hits;
 
     public Hits[] getHits() {
         return hits;
@@ -14,9 +14,9 @@ public class RecipeResponse {
     }
 
     public static class Hits {
-        private Recipe recipe;  // Recipe object inside each hit
+        private Recipe recipe;
 
-        // Getter and Setter for recipe
+
         public Recipe getRecipe() {
             return recipe;
         }
@@ -27,9 +27,9 @@ public class RecipeResponse {
     }
 
     public static class Recipe {
-        private String label;  // Recipe name
-        private String image;  // Image URL of the recipe
-        private String url;    // URL for the recipe (optional)
+        private String label;
+        private String image;
+        private String url;
 
         public String getLabel() {
             return label;

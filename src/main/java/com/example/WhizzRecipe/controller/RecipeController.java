@@ -1,8 +1,6 @@
 package com.example.WhizzRecipe.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 import com.example.WhizzRecipe.repository.RecipeRepository;
 import com.example.WhizzRecipe.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;

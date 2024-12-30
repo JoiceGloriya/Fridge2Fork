@@ -1,6 +1,5 @@
 package com.example.WhizzRecipe.configuration;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,7 +15,6 @@ public class EdamamConfig {
     @Value("${edamam.api.key:#{null}}") 
     private String appKey;
 
-    // Getter methods
     public String getBaseUrl() {
         return baseUrl;
     }
@@ -28,7 +26,6 @@ public class EdamamConfig {
     public String getAppKey() {
         return appKey;
     }
-
 
     public void validateConfig() {
         if (baseUrl == null || appId == null || appKey == null) {

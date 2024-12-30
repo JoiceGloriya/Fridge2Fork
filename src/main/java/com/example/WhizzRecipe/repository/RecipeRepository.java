@@ -9,15 +9,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, BigInteger> {
-    List<Recipe> findByTitleContainingIgnoreCase(String title); // For searching by title
+    List<Recipe> findByTitleContainingIgnoreCase(String title);
 
-    List<Recipe> findByGlutenFreeTrue(); // For gluten-free recipes
+    List<Recipe> findByGlutenFreeTrue();
 
-    List<Recipe> findByVeganTrue(); // For vegan recipes
+    List<Recipe> findByVeganTrue();
 
-    List<Recipe> findByVegetarianTrue(); // For vegetarian recipes
+    List<Recipe> findByVegetarianTrue();
 
-    List<Recipe> findByVeganTrueAndGlutenFreeTrue(); // For vegan and gluten-free recipes
+    List<Recipe> findByVeganTrueAndGlutenFreeTrue();
 
 }
 

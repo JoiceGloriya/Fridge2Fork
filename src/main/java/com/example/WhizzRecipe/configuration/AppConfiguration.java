@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 @Configuration
 public class AppConfiguration {
 
-
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
